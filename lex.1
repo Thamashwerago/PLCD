@@ -1,0 +1,19 @@
+%{
+#include <stdio.h>
+%}
+%%
+[0-9]+ { printf("NUMBER: %s\n",yytext); }
+[a-zA-Z]+ { printf("ID: %s\n",yytext); }
+\+ { printf("PLUS\n"); }
+\* { printf("TIMES\n"); }
+\( { printf("LPAREN\n"); }
+\) { printf("RPAREN\n"); }
+[\t\n]+ ;
+%%
+int main(){
+ yylex();
+ return 0;
+}
+int yywrap(){
+	return (1);
+}
