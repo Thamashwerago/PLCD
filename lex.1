@@ -1,19 +1,31 @@
+%option noyywrap
 %{
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "symbolTable.c"
+#include "parser.c"
 %}
+
 %%
-[0-9]+ { printf("NUMBER: %s\n",yytext); }
-[a-zA-Z]+ { printf("ID: %s\n",yytext); }
-\+ { printf("PLUS\n"); }
-\* { printf("TIMES\n"); }
-\( { printf("LPAREN\n"); }
-\) { printf("RPAREN\n"); }
-[\t\n]+ ;
+[0-9]+              { addToSymbolTable(yytext, NUMBER); printf("NUMBER\t%s\n", yytext); }
+[a-zA-Z]+           { addToSymbolTable(yytext, ID); printf("ID\t%s\n", yytext); }
+\+                  { addToSymbolTable(yytext, PLUS); printf("PLUS\t+\n"); }
+\*                  { addToSymbolTable(yytext, TIMES); printf("TIMES\t*\n"); }
+\(                  { addToSymbolTable(yytext, LPAREN); printf("LPAREN\t(\n"); }
+\)                  { addToSymbolTable(yytext, RPAREN); printf("RPAREN\t)\n"); }
+[ \t\n]+            ; // Ignore whitespace
+.                   { printf("Invalid character\t%s\n", yytext); }
+
 %%
-int main(){
- yylex();
- return 0;
-}
-int yywrap(){
-	return (1);
+
+int main() {
+    //printf("Enter the input string: ");
+    printf("Lexemes\n");
+    yylex();
+    printf("\n");
+    printSymbolTable();
+    printf("\n");
+    parser();
+    return 0;
 }
