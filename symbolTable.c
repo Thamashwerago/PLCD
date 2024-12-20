@@ -1,7 +1,7 @@
 typedef enum { NUMBER, ID, PLUS, TIMES, LPAREN, RPAREN, END } TokenType;
 
 struct Symbol {
-    char name[50];
+    char name[10];
     TokenType type;
 } symbolTable[100];
 int symbolCount = 0;
