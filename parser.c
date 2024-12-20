@@ -250,8 +250,6 @@ int parser() {
     // Assign positions to nodes dynamically
     assignPositions(parseTree, 0, svgWidth / 2);
 
-    printf("%d x %d\n",svgWidth,svgHeight);
-
     // Open SVG file for writing
     FILE* file = fopen("parseTree.svg", "w");
     if (file == NULL) {
