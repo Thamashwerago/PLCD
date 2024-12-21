@@ -245,7 +245,7 @@ int parser() {
 
     // Determine SVG size dynamically
     int svgWidth = maxWidth + 200;  // 200px per node horizontally
-    int svgHeight = (maxDepth + 1) * 150 + 100;  // 150px per level vertically
+    int svgHeight = maxDepth * 150;  // 150px per level vertically
 
     // Assign positions to nodes dynamically
     assignPositions(parseTree, 0, svgWidth / 2);
@@ -277,7 +277,7 @@ int parser() {
     // Close file
     fclose(file);
 
-    // Open SVG in the browser
+    // Open SVG in the browser 
     #ifdef _WIN32
         system("start parseTree.svg"); // Windows
     #elif __APPLE__
